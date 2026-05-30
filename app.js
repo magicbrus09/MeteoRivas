@@ -5,34 +5,34 @@ const RIVAS = {
 };
 
 const weatherCodes = {
-  0: ["Soleado", "☀"],
-  1: ["Mayormente despejado", "◐"],
-  2: ["Parcialmente nuboso", "☁"],
-  3: ["Cubierto", "☁"],
-  45: ["Niebla", "≋"],
-  48: ["Niebla con escarcha", "≋"],
-  51: ["Llovizna ligera", "╱"],
-  53: ["Llovizna", "╱"],
-  55: ["Llovizna intensa", "╱"],
-  56: ["Llovizna helada ligera", "╱"],
-  57: ["Llovizna helada intensa", "╱"],
-  61: ["Lluvia ligera", "☂"],
-  63: ["Lluvia", "☂"],
-  65: ["Lluvia intensa", "☂"],
-  66: ["Lluvia helada ligera", "☂"],
-  67: ["Lluvia helada intensa", "☂"],
-  71: ["Nieve ligera", "✳"],
-  73: ["Nieve", "✳"],
-  75: ["Nieve intensa", "✳"],
-  77: ["Granizo menudo", "✳"],
-  80: ["Chubascos ligeros", "☂"],
-  81: ["Chubascos", "☂"],
-  82: ["Chubascos intensos", "☂"],
-  85: ["Nevadas ligeras", "✳"],
-  86: ["Nevadas intensas", "✳"],
-  95: ["Tormenta", "⚡"],
-  96: ["Tormenta con granizo", "⚡"],
-  99: ["Tormenta fuerte con granizo", "⚡"],
+  0: ["Soleado", "sun"],
+  1: ["Mayormente despejado", "sun"],
+  2: ["Parcialmente nuboso", "partly"],
+  3: ["Cubierto", "cloud"],
+  45: ["Niebla", "fog"],
+  48: ["Niebla con escarcha", "fog"],
+  51: ["Llovizna ligera", "drizzle"],
+  53: ["Llovizna", "drizzle"],
+  55: ["Llovizna intensa", "drizzle"],
+  56: ["Llovizna helada ligera", "drizzle"],
+  57: ["Llovizna helada intensa", "drizzle"],
+  61: ["Lluvia ligera", "rain"],
+  63: ["Lluvia", "rain"],
+  65: ["Lluvia intensa", "rain"],
+  66: ["Lluvia helada ligera", "rain"],
+  67: ["Lluvia helada intensa", "rain"],
+  71: ["Nieve ligera", "snow"],
+  73: ["Nieve", "snow"],
+  75: ["Nieve intensa", "snow"],
+  77: ["Granizo menudo", "snow"],
+  80: ["Chubascos ligeros", "rain"],
+  81: ["Chubascos", "rain"],
+  82: ["Chubascos intensos", "rain"],
+  85: ["Nevadas ligeras", "snow"],
+  86: ["Nevadas intensas", "snow"],
+  95: ["Tormenta", "storm"],
+  96: ["Tormenta con granizo", "storm"],
+  99: ["Tormenta fuerte con granizo", "storm"],
 };
 
 const el = {
@@ -73,7 +73,63 @@ const formatters = {
 };
 
 function getWeatherInfo(code) {
-  return weatherCodes[code] ?? ["Tiempo variable", "•"];
+  return weatherCodes[code] ?? ["Tiempo variable", "cloud"];
+}
+
+function weatherIcon(name) {
+  const common = 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+  const icons = {
+    sun: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <circle ${common} cx="32" cy="32" r="12"/>
+        <path ${common} d="M32 6v8M32 50v8M6 32h8M50 32h8M13.6 13.6l5.7 5.7M44.7 44.7l5.7 5.7M50.4 13.6l-5.7 5.7M19.3 44.7l-5.7 5.7"/>
+      </svg>
+    `,
+    partly: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <circle ${common} cx="25" cy="25" r="10"/>
+        <path ${common} d="M25 7v6M25 37v5M7 25h6M40 25h5M12.3 12.3l4.2 4.2M34 34l3.7 3.7M37.7 12.3 34 16M16.5 34 12.3 38.2"/>
+        <path ${common} d="M24 49h26a9 9 0 0 0 1.2-17.9 13.2 13.2 0 0 0-25.3-3.5A10.8 10.8 0 0 0 24 49Z"/>
+      </svg>
+    `,
+    cloud: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 48h29a11 11 0 0 0 1.4-21.9 16 16 0 0 0-30.7-4.3A13.1 13.1 0 0 0 18 48Z"/>
+      </svg>
+    `,
+    fog: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 35h29a9 9 0 0 0 1.1-17.9 14 14 0 0 0-26.8-3.7A11.4 11.4 0 0 0 18 35Z"/>
+        <path ${common} d="M12 45h40M18 53h28"/>
+      </svg>
+    `,
+    drizzle: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 36h29a10 10 0 0 0 1.3-19.9 15 15 0 0 0-28.8-4A12.3 12.3 0 0 0 18 36Z"/>
+        <path ${common} d="M24 46v5M34 44v5M44 46v5"/>
+      </svg>
+    `,
+    rain: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 35h29a10 10 0 0 0 1.3-19.9 15 15 0 0 0-28.8-4A12.3 12.3 0 0 0 18 35Z"/>
+        <path ${common} d="m24 45-3 7M35 43l-3 8M46 45l-3 7"/>
+      </svg>
+    `,
+    snow: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 34h29a10 10 0 0 0 1.3-19.9 15 15 0 0 0-28.8-4A12.3 12.3 0 0 0 18 34Z"/>
+        <path ${common} d="M25 46v8M21.5 48l7 4M28.5 48l-7 4M40 44v8M36.5 46l7 4M43.5 46l-7 4"/>
+      </svg>
+    `,
+    storm: `
+      <svg class="weather-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <path ${common} d="M18 34h29a10 10 0 0 0 1.3-19.9 15 15 0 0 0-28.8-4A12.3 12.3 0 0 0 18 34Z"/>
+        <path ${common} d="m34 40-7 12h8l-5 8 12-14h-8l5-6Z"/>
+      </svg>
+    `,
+  };
+
+  return icons[name] ?? icons.cloud;
 }
 
 function round(value) {
@@ -116,7 +172,7 @@ function renderCurrent(data) {
   const units = data.current_units;
   const [label, icon] = getWeatherInfo(current.weather_code);
 
-  el.currentIcon.textContent = icon;
+  el.currentIcon.innerHTML = weatherIcon(icon);
   el.currentCondition.textContent = label;
   el.currentTemp.textContent = round(current.temperature_2m);
   el.feelsLike.textContent = `${round(current.apparent_temperature)}${units.apparent_temperature}`;
@@ -147,7 +203,7 @@ function renderHourly(data) {
       return `
         <article class="hour-card" aria-label="${formatters.time.format(hour.time)}, ${label}">
           <div class="time-label">${formatters.time.format(hour.time)}</div>
-          <div class="mini-icon" aria-hidden="true">${icon}</div>
+          <div class="mini-icon" aria-hidden="true">${weatherIcon(icon)}</div>
           <div>
             <div class="hour-temp">${round(hour.temp)}°</div>
             <div class="rain-chance">${hour.rain ?? 0}% lluvia</div>
@@ -183,7 +239,7 @@ function renderDaily(data) {
             <div class="day-name">${dayName}</div>
             <div class="day-date">${formatters.dayMonth.format(day.time)}</div>
           </div>
-          <div class="mini-icon" aria-hidden="true">${icon}</div>
+          <div class="mini-icon" aria-hidden="true">${weatherIcon(icon)}</div>
           <div class="day-temp">${round(day.min)}° / ${round(day.max)}°</div>
           <div class="rain-chance">${day.rain ?? 0}% lluvia</div>
           <div class="wind-line">Viento ${round(day.wind)} km/h</div>
