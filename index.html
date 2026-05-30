@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tiempo en Rivas Vaciamadrid</title>
+    <link rel="preconnect" href="https://api.open-meteo.com">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="weather-view" aria-labelledby="page-title">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Rivas Vaciamadrid</p>
+            <h1 id="page-title">Tiempo local</h1>
+            <p class="updated" id="updated">Conectando con la previsión...</p>
+          </div>
+          <button class="refresh-button" id="refresh" type="button" aria-label="Actualizar tiempo">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </header>
+
+        <section class="current-panel" aria-label="Tiempo actual">
+          <div class="current-main">
+            <div class="weather-icon" id="current-icon" aria-hidden="true">--</div>
+            <div>
+              <p class="condition" id="current-condition">Cargando</p>
+              <p class="temperature"><span id="current-temp">--</span><span id="temp-unit">°C</span></p>
+            </div>
+          </div>
+
+          <dl class="metrics-grid">
+            <div>
+              <dt>Sensación</dt>
+              <dd id="feels-like">--</dd>
+            </div>
+            <div>
+              <dt>Humedad</dt>
+              <dd id="humidity">--</dd>
+            </div>
+            <div>
+              <dt>Viento</dt>
+              <dd id="wind">--</dd>
+            </div>
+            <div>
+              <dt>Lluvia</dt>
+              <dd id="rain">--</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="forecast-block" aria-labelledby="hourly-title">
+          <div class="section-heading">
+            <h2 id="hourly-title">Próximas horas</h2>
+            <p id="today-range">--</p>
+          </div>
+          <div class="hour-strip" id="hourly"></div>
+        </section>
+
+        <section class="forecast-block" aria-labelledby="daily-title">
+          <div class="section-heading">
+            <h2 id="daily-title">Próximos días</h2>
+            <p>Previsión a 7 días</p>
+          </div>
+          <div class="daily-grid" id="daily"></div>
+        </section>
+
+        <p class="status-message" id="status" role="status"></p>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
